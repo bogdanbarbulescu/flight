@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Simulator Dashboard</title>
+    <title>Flight Learning Platform</title> <!-- Broader Title -->
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -23,160 +23,170 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
-    <!-- REMOVED Integrity Hash for RotatedMarker for compatibility -->
+    <!-- REMOVED Integrity Hash for RotatedMarker -->
     <script src="https://unpkg.com/leaflet-rotatedmarker@0.2.0/leaflet.rotatedMarker.js"
             crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
-    <!-- Defer loading our custom script -->
+    <!-- Defer loading our custom script (ensure it loads AFTER libraries) -->
     <script src="app.js" defer></script>
+    <!-- Or if using modules: <script type="module" src="js/main.js" defer></script> -->
+
 </head>
 <body>
-    <div class="container-fluid mt-3">
-        <!-- Header Row: Title -->
-        <div class="row mb-3">
-            <div class="col">
-                <h1 class="text-center page-title" id="flight-title">
-                    Flight Simulator <i class="fa-solid fa-plane"></i>
-                </h1>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#simulator"> <!-- Link to default section -->
+          <i class="fa-solid fa-plane-up me-2"></i>Flight Platform
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <!-- Use data-navigo or similar attribute for JS router later -->
+              <a class="nav-link active" aria-current="page" href="#simulator" data-nav-target="simulator">
+                <i class="fa-solid fa-gauge-high me-1"></i>Simulator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#learn" data-nav-target="learn">
+                <i class="fa-solid fa-book-open-reader me-1"></i>Learn</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#quiz" data-nav-target="quiz">
+                <i class="fa-solid fa-clipboard-question me-1"></i>Quiz</a>
+            </li>
+            <!-- Add more sections like Profile later -->
+          </ul>
+          <!-- Dark Mode Toggle in Navbar -->
+          <div class="d-flex align-items-center">
+             <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="dark-mode-toggle">
+                <label class="form-check-label text-light small" for="dark-mode-toggle">Dark Mode</label>
             </div>
+          </div>
         </div>
+      </div>
+    </nav>
+    <!-- End Navigation Bar -->
 
-        <!-- Main Content Row -->
-        <div class="row">
 
-            <!-- Left Column: Route, PFD, Map -->
-            <div class="col-lg-8 order-lg-1 mb-3 mb-lg-0">
+    <!-- Main Content Area -->
+    <div class="container-fluid mt-4" id="main-content">
 
-                <!-- Route Selection Card (Moved to Top Left) -->
-                <div class="card shadow-sm mb-3">
-                     <div class="card-header"><i class="fa-solid fa-route me-2"></i>Route Selection</div>
-                     <div class="card-body">
-                         <label for="route-selector" class="form-label visually-hidden">Select Route:</label> <!-- Hidden label, handled by card header -->
-                         <select class="form-select form-select-sm" id="route-selector" aria-label="Select flight route">
-                             <option selected disabled>Loading routes...</option>
-                             <!-- Options populated by JS -->
-                         </select>
+        <!-- Section: Simulator (Visible by default) -->
+        <section id="simulator-section" class="active-section">
+            <h2 class="visually-hidden">Flight Simulator</h2> <!-- Hidden title for screen readers -->
+            <div class="row">
+
+                <!-- Left Column: Route, PFD, Map -->
+                <div class="col-lg-8 order-lg-1 mb-3 mb-lg-0">
+
+                    <!-- Route Selection Card -->
+                    <div class="card shadow-sm mb-3">
+                         <div class="card-header"><i class="fa-solid fa-route me-2"></i>Route Selection</div>
+                         <div class="card-body">
+                             <label for="route-selector" class="form-label visually-hidden">Select Route:</label>
+                             <select class="form-select form-select-sm" id="route-selector" aria-label="Select flight route">
+                                 <option selected disabled>Loading routes...</option>
+                             </select>
+                        </div>
                     </div>
-                </div>
 
-                <!-- PFD Card -->
-                <div class="card shadow-sm mb-3">
-                     <div class="card-header"><i class="fa-solid fa-gauge-high me-2"></i>Primary Flight Display (PFD)</div>
-                     <div class="card-body p-0"> <!-- No padding to allow PFD edges to align -->
-                        <div id="pfd" class="pfd-container">
-                            <div class="pfd-background">
-                                <!-- Attitude -->
-                                <div class="attitude-indicator"><div class="attitude-roll"></div><div class="attitude-pitch"></div><div class="attitude-fixed"></div></div>
-                                <!-- Speed -->
-                                <div class="tape speed-tape"><div class="tape-scale speed-scale"></div><div class="tape-value-box speed-value-box"><span id="current-speed-value">---</span> <span class="unit">km/h</span></div></div>
-                                <!-- Altitude -->
-                                <div class="tape altitude-tape"><div class="tape-scale altitude-scale"></div><div class="tape-value-box altitude-value-box"><span id="current-altitude-value">-----</span> <span class="unit">m</span></div></div>
-                                <!-- Heading -->
-                                <div class="heading-tape-container"><div class="tape-scale heading-scale"></div><div class="heading-indicator">▲</div><div class="heading-value-box"><span id="current-heading-value">---</span>°</div></div>
-                                <!-- VSI -->
-                                <div class="vsi"><div class="vsi-needle"></div><div class="vsi-scale"><div class="vsi-mark vsi-up-2">+10</div><div class="vsi-mark vsi-up-1">+5</div><div class="vsi-mark vsi-level">0</div><div class="vsi-mark vsi-down-1">-5</div><div class="vsi-mark vsi-down-2">-10</div></div><div class="vsi-value-box"><span id="current-vsi-value">----</span> <span class="unit">m/min</span></div></div>
+                    <!-- PFD Card -->
+                    <div class="card shadow-sm mb-3">
+                         <div class="card-header"><i class="fa-solid fa-gauge-high me-2"></i>Primary Flight Display (PFD)</div>
+                         <div class="card-body p-0">
+                            <div id="pfd" class="pfd-container">
+                                <div class="pfd-background">
+                                   
+                                    <div class="attitude-indicator"><div class="attitude-roll"></div><div class="attitude-pitch"></div><div class="attitude-fixed"></div></div>
+                                    <div class="tape speed-tape"><div class="tape-scale speed-scale"></div><div class="tape-value-box speed-value-box"><span id="current-speed-value">---</span> <span class="unit">km/h</span></div></div>
+                                    <div class="tape altitude-tape"><div class="tape-scale altitude-scale"></div><div class="tape-value-box altitude-value-box"><span id="current-altitude-value">-----</span> <span class="unit">m</span></div></div>
+                                    <div class="heading-tape-container"><div class="tape-scale heading-scale"></div><div class="heading-indicator">▲</div><div class="heading-value-box"><span id="current-heading-value">---</span>°</div></div>
+                                    <div class="vsi"><div class="vsi-needle"></div><div class="vsi-scale"><div class="vsi-mark vsi-up-2">+10</div><div class="vsi-mark vsi-up-1">+5</div><div class="vsi-mark vsi-level">0</div><div class="vsi-mark vsi-down-1">-5</div><div class="vsi-mark vsi-down-2">-10</div></div><div class="vsi-value-box"><span id="current-vsi-value">----</span> <span class="unit">m/min</span></div></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                 <!-- Map Card -->
-                <div class="card shadow-sm">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="fa-solid fa-map-location-dot me-2"></i>Map</span>
-                         <div class="form-check form-switch form-check-reverse">
-                            <input class="form-check-input" type="checkbox" role="switch" id="info-card-toggle" checked>
-                            <label class="form-check-label small" for="info-card-toggle">Show Info</label>
-                        </div>
-                    </div>
-                    <div class="card-body p-0 map-card-body"> <!-- Relative position needed for absolute info card -->
-                        <!-- Info Card (Positioned over map) -->
-                        <div id="info-card" class="info-card">
-                            <button id="info-card-close" class="info-card-close" aria-label="Close Flight Information">×</button>
-                            <h6><i class="fa-solid fa-circle-info me-1"></i>Flight Info</h6>
-                            <hr class="my-1">
-                            <p>Status: <span id="info-status">Idle</span></p>
-                            <p>Position: <span id="info-position">--.-- N, --.-- E</span></p>
-                            <p>Altitude: <span id="info-altitude">-----</span> m</p>
-                            <p>Gnd Spd: <span id="info-speed">---</span> km/h</p>
-                            <p>Heading: <span id="info-heading">---</span>°</p>
-                            <p>V/S: <span id="info-vsi">----</span> m/min</p>
-                            <hr class="my-1">
-                            <p>Route: <span id="info-route-origin">---</span> <i class="fa-solid fa-arrow-right-long"></i> <span id="info-route-dest">---</span></p>
-                            <p>Dist Total: <span id="info-total-distance">---</span> km</p>
-                            <p>Dist Flown: <span id="info-flown-distance">---</span> km</p>
-                            <p>Dist Rem: <span id="info-remaining-distance">---</span> km</p>
-                            <p>Next WPT: <span id="info-next-wpt">---</span></p>
-                            <p>ETA: <span id="info-eta">--:--:--</span></p>
-                            <hr class="my-1">
-                            <p>Wind: <span id="info-wind">---° @ --- km/h</span></p>
-                        </div>
-                        <!-- Map Container -->
-                        <div id="map"></div>
-                    </div>
-                </div>
-
-            </div><!-- End Left Column -->
-
-            <!-- Right Column: Controls & Charts -->
-            <div class="col-lg-4 order-lg-2">
-                <!-- Controls Card -->
-                <div class="card shadow-sm mb-3">
-                    <div class="card-header"><i class="fa-solid fa-sliders me-2"></i>Parameters & Actions</div>
-                    <div class="card-body">
-
-                        <!-- Sliders -->
-                        <h6 class="card-subtitle mb-2 text-muted">Autopilot Targets</h6>
-                        <div class="mb-3">
-                            <label for="target-altitude" class="form-label">Target Altitude: <span id="target-altitude-value">3000</span> m</label>
-                            <input type="range" class="form-range" id="target-altitude" min="300" max="12000" step="100" value="3000">
-                        </div>
-                        <div class="mb-3">
-                            <label for="target-speed" class="form-label">Target Airspeed: <span id="target-speed-value">400</span> km/h</label>
-                            <input type="range" class="form-range" id="target-speed" min="150" max="850" step="10" value="400">
-                        </div>
-
-                         <hr> <!-- Separator -->
-
-                         <!-- Action Buttons -->
-                         <h6 class="card-subtitle mb-2 text-muted">Simulation Control</h6>
-                         <div class="d-grid gap-2 mb-3">
-                            <button id="autopilot-toggle" class="btn btn-primary btn-sm"><i class="fa-solid fa-power-off me-1"></i> Engage Autopilot</button>
-                            <button id="reset-button" class="btn btn-danger btn-sm"><i class="fa-solid fa-rotate-right me-1"></i> Reset Current Route</button>
-                        </div>
-
-                         <hr> <!-- Separator -->
-
-                        <!-- Settings Toggle -->
-                         <h6 class="card-subtitle mb-2 text-muted">Settings</h6>
-                         <div class="text-end">
-                            <div class="form-check form-switch d-inline-block">
-                                <input class="form-check-input" type="checkbox" role="switch" id="dark-mode-toggle">
-                                <label class="form-check-label small" for="dark-mode-toggle">Dark Mode</label>
+                     <!-- Map Card -->
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-map-location-dot me-2"></i>Map</span>
+                             <div class="form-check form-switch form-check-reverse">
+                                <input class="form-check-input" type="checkbox" role="switch" id="info-card-toggle" checked>
+                                <label class="form-check-label small" for="info-card-toggle">Show Info</label>
                             </div>
                         </div>
-                    </div> <!-- End card-body -->
-                </div> <!-- End Controls Card -->
-
-                <!-- Charts Card -->
-                <div class="card shadow-sm">
-                     <div class="card-header"><i class="fa-solid fa-chart-line me-2"></i>Data Charts</div>
-                     <div class="card-body">
-                         <h6 class="text-center chart-title">Altitude & Speed</h6>
-                         <div class="chart-wrapper mb-3">
-                             <canvas id="altitudeSpeedChart"></canvas>
-                         </div>
-                         <hr>
-                         <h6 class="text-center chart-title">Conceptual Forces</h6>
-                         <div class="chart-wrapper">
-                            <canvas id="forcesChart"></canvas>
-                         </div>
+                        <div class="card-body p-0 map-card-body">
+                            <div id="info-card" class="info-card">
+                                {/* Info card content */}
+                                <button id="info-card-close" class="info-card-close" aria-label="Close Flight Information">×</button>
+                                <h6><i class="fa-solid fa-circle-info me-1"></i>Flight Info</h6> <hr class="my-1">
+                                <p>Status: <span id="info-status">Idle</span></p> <p>Position: <span id="info-position">--.-- N, --.-- E</span></p> <p>Altitude: <span id="info-altitude">-----</span> m</p> <p>Gnd Spd: <span id="info-speed">---</span> km/h</p> <p>Heading: <span id="info-heading">---</span>°</p> <p>V/S: <span id="info-vsi">----</span> m/min</p> <hr class="my-1">
+                                <p>Route: <span id="info-route-origin">---</span> <i class="fa-solid fa-arrow-right-long"></i> <span id="info-route-dest">---</span></p> <p>Dist Total: <span id="info-total-distance">---</span> km</p> <p>Dist Flown: <span id="info-flown-distance">---</span> km</p> <p>Dist Rem: <span id="info-remaining-distance">---</span> km</p> <p>Next WPT: <span id="info-next-wpt">---</span></p> <p>ETA: <span id="info-eta">--:--:--</span></p> <hr class="my-1">
+                                <p>Wind: <span id="info-wind">---° @ --- km/h</span></p>
+                            </div>
+                            <div id="map"></div>
+                        </div>
                     </div>
-                </div><!-- End Charts Card -->
-            </div> <!-- End Right Column -->
-        </div> <!-- End Main Content Row -->
-    </div> <!-- End Container -->
+
+                </div><!-- End Left Column -->
+
+                <!-- Right Column: Controls & Charts -->
+                <div class="col-lg-4 order-lg-2">
+                    <!-- Controls Card -->
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-header"><i class="fa-solid fa-sliders me-2"></i>Parameters & Actions</div>
+                        <div class="card-body">
+                           
+                            <h6 class="card-subtitle mb-2 text-muted">Autopilot Targets</h6>
+                            <div class="mb-3"> <label for="target-altitude" class="form-label">Target Altitude: <span id="target-altitude-value">3000</span> m</label> <input type="range" class="form-range" id="target-altitude" min="300" max="12000" step="100" value="3000"> </div>
+                            <div class="mb-3"> <label for="target-speed" class="form-label">Target Airspeed: <span id="target-speed-value">400</span> km/h</label> <input type="range" class="form-range" id="target-speed" min="150" max="850" step="10" value="400"> </div>
+                            <hr>
+                             <h6 class="card-subtitle mb-2 text-muted">Simulation Control</h6>
+                             <div class="d-grid gap-2 mb-3"> <button id="autopilot-toggle" class="btn btn-primary btn-sm"><i class="fa-solid fa-power-off me-1"></i> Engage Autopilot</button> <button id="reset-button" class="btn btn-danger btn-sm"><i class="fa-solid fa-rotate-right me-1"></i> Reset Current Route</button> </div>
+                             <hr>
+                            
+                            
+                        </div>
+                    </div> <!-- End Controls Card -->
+
+                    <!-- Charts Card -->
+                    <div class="card shadow-sm">
+                         <div class="card-header"><i class="fa-solid fa-chart-line me-2"></i>Data Charts</div>
+                         <div class="card-body">
+                            
+                             <h6 class="text-center chart-title">Altitude & Speed</h6> <div class="chart-wrapper mb-3"> <canvas id="altitudeSpeedChart"></canvas> </div> <hr>
+                             <h6 class="text-center chart-title">Conceptual Forces</h6> <div class="chart-wrapper"> <canvas id="forcesChart"></canvas> </div>
+                        </div>
+                    </div><!-- End Charts Card -->
+                </div> <!-- End Right Column -->
+            </div> <!-- End Row -->
+        </section> <!-- End Simulator Section -->
+
+        <!-- Section: Learn (Hidden by default) -->
+        <section id="learn-section" class="content-section" style="display: none;">
+            <h2>Learning Center</h2>
+            <p>Content for the learning modules will go here...</p>
+           
+        </section>
+
+         <!-- Section: Quiz (Hidden by default) -->
+        <section id="quiz-section" class="content-section" style="display: none;">
+             <h2>Quiz Area</h2>
+             <p>Quiz questions and interface will go here...</p>
+             
+        </section>
+
+    </div> <!-- End Main Content Container -->
+
+     <!-- Bootstrap JS Bundle (Optional, needed for dropdown toggling on mobile) -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
