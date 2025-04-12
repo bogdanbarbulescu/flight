@@ -3,36 +3,36 @@
 /* --- Color Variables --- */
 :root {
     /* Light Mode Defaults */
-    --bg-color: #f8f9fa;                            /* Bootstrap light gray background */
-    --text-color: #212529;                          /* Bootstrap default text */
-    --text-muted-color: #6c757d;                   /* Bootstrap muted text */
-    --border-color: #dee2e6;                       /* Bootstrap default border */
-    --card-bg-color: #ffffff;                       /* Card background */
-    --card-border-color: rgba(0, 0, 0, 0.175);      /* Bootstrap card border */
-    --info-card-bg: rgba(255, 255, 255, 0.92);     /* Info card background (slightly more opaque) */
-    --info-card-text: #333;                         /* Info card text */
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --text-muted-color: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg-color: #ffffff;
+    --card-border-color: rgba(0, 0, 0, 0.175);
+    --info-card-bg: rgba(255, 255, 255, 0.92);
+    --info-card-text: #333;
     --info-card-close-text: #666;
     --info-card-close-hover: #000;
     --pfd-border-color: #555;
-    --pfd-bg-color: #282c34;                        /* PFD usually stays darkish */
+    --pfd-bg-color: #282c34;
     --pfd-text-color: #ffffff;
     --pfd-border-internal: #888;
-    --pfd-attitude-sky: #87CEEB;                    /* Standard sky blue */
-    --pfd-attitude-ground: #A0522D;                 /* Standard ground brown (Sienna) */
+    --pfd-attitude-sky: #87CEEB;
+    --pfd-attitude-ground: #A0522D;
     --pfd-fixed-symbol: yellow;
     --pfd-tape-tick: white;
-    --pfd-value-box-bg: rgba(0, 0, 0, 0.75);        /* PFD value box background */
+    --pfd-value-box-bg: rgba(0, 0, 0, 0.75);
     --pfd-value-box-border: yellow;
     --pfd-vsi-needle: cyan;
-    --chart-bg: var(--card-bg-color);               /* Chart background matches card */
-    --chart-border: var(--card-border-color);       /* Chart border matches card */
-    --chart-title-color: var(--text-color);
-    --chart-grid-color: rgba(0, 0, 0, 0.1);         /* Chart grid lines */
-    --chart-label-color: #666;                      /* Chart axis labels */
-    --link-color: #0d6efd;                          /* Bootstrap primary blue */
+    --chart-bg: var(--card-bg-color);
+    --chart-border: var(--card-border-color);
+    --chart-title-color: var(--text-color);         /* Use main text color */
+    --chart-grid-color: rgba(0, 0, 0, 0.1);
+    --chart-label-color: var(--text-muted-color);   /* Use muted text for axis labels */
+    --link-color: #0d6efd;
     --form-range-thumb-bg: var(--link-color);
-    --form-switch-bg: #dee2e6;                      /* Unchecked switch background */
-    --form-switch-checked-bg: var(--link-color);    /* Checked switch background */
+    --form-switch-bg: #dee2e6;
+    --form-switch-checked-bg: var(--link-color);
     --form-switch-border-color: rgba(0, 0, 0, 0.25);
     --button-primary-bg: #0d6efd;
     --button-primary-border: #0d6efd;
@@ -43,45 +43,46 @@
     --button-warning-bg: #ffc107;
     --button-warning-border: #ffc107;
     --button-warning-text: #000;
-    --transition-speed: 0.3s;                       /* Standard transition speed */
+    --transition-speed: 0.3s;
 }
 
 /* --- Dark Mode Overrides --- */
 body.dark-mode {
-    --bg-color: #212529;                            /* Bootstrap dark background */
-    --text-color: #e9ecef;                          /* Bootstrap dark text */
-    --text-muted-color: #adb5bd;
-    --border-color: #495057;                        /* Darker border */
-    --card-bg-color: #343a40;                       /* Bootstrap dark card background */
-    --card-border-color: rgba(255, 255, 255, 0.125);/* Bootstrap dark card border */
-    --info-card-bg: rgba(40, 45, 50, 0.95);         /* Darker info card background */
+    --bg-color: #212529;
+    --text-color: #dee2e6;                          /* Main text color for dark mode */
+    --text-muted-color: #adb5bd;                   /* Muted text color */
+    --border-color: #495057;
+    --card-bg-color: #343a40;
+    --card-border-color: rgba(255, 255, 255, 0.125);
+    --info-card-bg: rgba(40, 45, 50, 0.95);
     --info-card-text: #f1f1f1;
     --info-card-close-text: #aaa;
     --info-card-close-hover: #fff;
     --pfd-border-color: #888;
-    --pfd-bg-color: #1a1d21;                        /* Even darker PFD background */
+    --pfd-bg-color: #1a1d21;
     --pfd-text-color: #f0f0f0;
     --pfd-border-internal: #666;
-    --pfd-attitude-sky: #4a7a91;                    /* Darker sky */
-    --pfd-attitude-ground: #6b432a;                 /* Darker ground */
+    --pfd-attitude-sky: #4a7a91;
+    --pfd-attitude-ground: #6b432a;
     --pfd-value-box-bg: rgba(10, 10, 10, 0.8);
     --chart-bg: var(--card-bg-color);
     --chart-border: var(--card-border-color);
-    --chart-title-color: var(--text-color);
-    --chart-grid-color: rgba(255, 255, 255, 0.1);   /* Lighter grid lines for dark */
-    --chart-label-color: #adb5bd;                   /* Muted text for dark labels */
-    --link-color: #6ea8fe;                          /* Lighter blue for dark */
+    /* **** UPDATED DARK MODE CHART/SUBTITLE COLORS **** */
+    --chart-title-color: var(--text-color);         /* Use main dark text color */
+    --chart-grid-color: rgba(255, 255, 255, 0.1);
+    --chart-label-color: var(--text-muted-color);   /* Use muted dark text color (slightly brighter) */
+    /* **** END UPDATED COLORS **** */
+    --link-color: #6ea8fe;
     --form-range-thumb-bg: var(--link-color);
-    --form-switch-bg: #495057;                      /* Darker unchecked switch */
+    --form-switch-bg: #495057;
     --form-switch-checked-bg: var(--link-color);
     --form-switch-border-color: rgba(255, 255, 255, 0.25);
-    --button-primary-bg: #3b71ca;                   /* Adjusted dark primary */
+    --button-primary-bg: #3b71ca;
     --button-primary-border: #3b71ca;
-    --button-danger-bg: #dc3545;                    /* Danger often stays the same */
+    --button-danger-bg: #dc3545;
     --button-danger-border: #dc3545;
-    --button-warning-bg: #ffca2c;                   /* Adjusted dark warning */
+    --button-warning-bg: #ffca2c;
     --button-warning-border: #ffca2c;
-    --button-warning-text: #000;                    /* Keep text dark for yellow */
 }
 
 /* --- Base Styles & Transitions --- */
@@ -92,219 +93,88 @@ body {
     transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
-.page-title, .chart-title, label, .form-label, .card-title {
+/* Apply base text color more broadly */
+.page-title, label, .form-label, .card-title, .card-header span, .form-check-label {
     color: var(--text-color);
     transition: color var(--transition-speed) ease;
 }
 
-.unit { /* Style for units in PFD/Info Card */
+.unit {
     font-size: 0.8em;
     color: var(--text-muted-color);
     margin-left: 2px;
     transition: color var(--transition-speed) ease;
 }
 
-/* --- Map Styles --- */
-#map {
-    /* aspect-ratio: 16 / 9; Set fixed height or aspect ratio */
-    height: 500px; /* Default height, adjust as needed */
-    width: 100%;
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem; /* Bootstrap default */
-    transition: border-color var(--transition-speed) ease;
-    background-color: #eee; /* Placeholder bg for loading */
+/* Card subtitles specifically */
+h6.card-subtitle, .text-muted { /* Apply muted color explicitly */
+    color: var(--text-muted-color) !important; /* Use important if needed to override Bootstrap */
+    transition: color var(--transition-speed) ease;
+    font-size: 0.9rem; /* Optional: slightly smaller */
 }
-.dark-mode #map {
-    background-color: #444; /* Dark placeholder bg */
+/* Ensure chart titles use the correct variable */
+.chart-title {
+    color: var(--chart-title-color);
+    font-weight: 500; /* Make chart titles slightly bolder */
+     transition: color var(--transition-speed) ease;
 }
 
-/* Leaflet Controls Theming */
-.leaflet-control-zoom a {
-    background-color: var(--card-bg-color);
-    color: var(--text-color);
-    border-bottom-color: var(--border-color);
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
-}
-.leaflet-control-zoom a:hover {
-    background-color: var(--bg-color);
-}
-.dark-mode .leaflet-control-attribution {
-    background: rgba(52, 58, 64, 0.85); /* Darker attribution bg */
-    color: var(--text-muted-color);
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-}
+
+/* --- Map Styles --- */
+#map { height: 500px; width: 100%; border: 1px solid var(--border-color); border-radius: 0.375rem; transition: border-color var(--transition-speed) ease; background-color: #eee; }
+.dark-mode #map { background-color: #444; }
+.leaflet-control-zoom a { background-color: var(--card-bg-color); color: var(--text-color); border-bottom-color: var(--border-color); transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+.leaflet-control-zoom a:hover { background-color: var(--bg-color); }
+.dark-mode .leaflet-control-attribution { background: rgba(52, 58, 64, 0.85); color: var(--text-muted-color); transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease; }
+
 
 /* --- Card Styles --- */
-.card {
-    background-color: var(--card-bg-color);
-    border: 1px solid var(--card-border-color);
-    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
-    /* Bootstrap handles shadow, can customize here */
-}
-.dark-mode .card {
-    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .2);
-}
+.card { background-color: var(--card-bg-color); border: 1px solid var(--card-border-color); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+.dark-mode .card { box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .2); }
+.card-header { background-color: rgba(0,0,0,0.03); border-bottom: 1px solid var(--card-border-color); color: var(--text-color); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, color var(--transition-speed) ease; font-weight: 500; padding: 0.5rem 1rem; }
+.dark-mode .card-header { background-color: rgba(255,255,255,0.05); border-bottom-color: var(--card-border-color); }
+.map-card-body { position: relative; } /* Needed for absolute info card positioning */
+
 
 /* --- Info Card (Absolutely Positioned) --- */
-#info-card {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 90%; /* Responsive width */
-    max-width: 320px;
-    background-color: var(--info-card-bg);
-    border: 1px solid var(--card-border-color);
-    color: var(--info-card-text);
-    border-radius: 0.375rem;
-    padding: 1rem;
-    z-index: 1000; /* Above map */
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
-    display: block; /* Initially visible */
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-}
-.dark-mode #info-card {
-     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .5); /* Darker shadow */
-}
-
+#info-card { position: absolute; top: 15px; right: 15px; width: 90%; max-width: 320px; background-color: var(--info-card-bg); border: 1px solid var(--card-border-color); color: var(--info-card-text); border-radius: 0.375rem; padding: 1rem; z-index: 1000; box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15); display: block; transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease; }
+.dark-mode #info-card { box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .5); }
 #info-card.hidden { display: none; }
-#info-card h4 { margin-top: 0; margin-bottom: 0.75rem; font-size: 1.1rem; }
-#info-card p { margin-bottom: 0.5rem; font-size: 0.85rem; }
-#info-card hr { border-top: 1px solid var(--border-color); margin: 0.75rem 0; transition: border-top-color var(--transition-speed) ease; }
+#info-card h6 { margin-top: 0; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 600; color: var(--info-card-text); }
+#info-card p { margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--info-card-text); }
+#info-card p span { font-weight: 500; }
+#info-card hr { border-top: 1px solid var(--border-color); margin: 0.5rem 0; transition: border-top-color var(--transition-speed) ease; }
 #info-card-close { position: absolute; top: 0.5rem; right: 0.75rem; background: none; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--info-card-close-text); transition: color var(--transition-speed) ease;}
 #info-card-close:hover { color: var(--info-card-close-hover); }
 
 
 /* --- PFD Styles --- */
-.pfd-container {
-    position: relative;
-    height: 300px; /* Adjust height as needed */
-    width: 100%; /* Takes width of column */
-    max-width: 600px; /* Optional max width */
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden; /* Clip tape edges */
-    border: 2px solid var(--pfd-border-color);
-    border-radius: 5px;
-    transition: border-color var(--transition-speed) ease;
-}
-.pfd-background {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: var(--pfd-bg-color);
-    color: var(--pfd-text-color);
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-}
-/* Attitude Indicator */
-.attitude-indicator {
-    position: absolute; top: 50%; left: 50%; width: 150px; height: 150px;
-    transform: translate(-50%, -50%);
-    border: 1px solid var(--pfd-border-internal); border-radius: 50%; overflow: hidden;
-    background: linear-gradient(to bottom, var(--pfd-attitude-sky) 50%, var(--pfd-attitude-ground) 50%);
-    transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
-}
-.attitude-fixed { /* Aircraft symbol */
-    position: absolute; top: 50%; left: 50%; width: 0; height: 0;
-    transform: translate(-50%, -50%);
-    border-left: 15px solid transparent; border-right: 15px solid transparent;
-    border-bottom: 10px solid var(--pfd-fixed-symbol); z-index: 3;
-}
-.attitude-fixed:before, .attitude-fixed:after { /* Wings */
-    content: ''; position: absolute; top: 10px; width: 35px; height: 5px;
-    background-color: var(--pfd-fixed-symbol);
-}
-.attitude-fixed:before { left: -35px; }
-.attitude-fixed:after { right: -35px;}
-.attitude-roll, .attitude-pitch { position: absolute; width: 100%; height: 100%; z-index: 1; } /* For future animation */
-
-/* Tapes */
-.tape {
-    position: absolute; height: 100%; width: 70px; /* Adjusted width */
-    border-left: 1px solid var(--pfd-border-internal);
-    border-right: 1px solid var(--pfd-border-internal);
-    overflow: hidden; transition: border-color var(--transition-speed) ease;
-}
-.speed-tape { left: 10px; border-right: none;}
-.altitude-tape { right: 10px; border-left: none;}
-.tape-scale { /* The scrolling element */
-    position: absolute; width: 100%; height: 3000px; /* Tall enough for range */
-    top: 50%; /* Start centered */
-    background-image: linear-gradient(to bottom, var(--pfd-tape-tick) 1px, transparent 1px);
-    background-size: 100% 10px; /* Tick marks every 10px */
-    transform: translateY(-50%); /* Initial center correction */
-    transition: transform 0.1s linear; /* Smooth scroll animation */
-}
-.tape-value-box { /* The box indicating the current value */
-    position: absolute; top: 50%; left: 0; width: 100%;
-    transform: translateY(-50%);
-    background-color: var(--pfd-value-box-bg);
-    border: 1px solid var(--pfd-value-box-border);
-    color: var(--pfd-text-color); padding: 2px 5px;
-    text-align: center; font-weight: bold; z-index: 5;
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
-}
-.speed-value-box { text-align: right; padding-right: 8px; }
-.altitude-value-box { text-align: left; padding-left: 8px; }
-
-/* Heading Tape */
-.heading-tape-container {
-    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-    width: 250px; height: 50px; border: 1px solid var(--pfd-border-internal);
-    overflow: hidden; transition: border-color var(--transition-speed) ease;
-}
-.heading-scale { /* The scrolling element */
-    position: absolute; height: 100%; width: 2000px; /* Wide enough for 360 deg */
-    left: 50%; /* Start centered */
-    background-image: linear-gradient(to right, var(--pfd-tape-tick) 1px, transparent 1px);
-    background-size: 10px 100%; /* Tick marks every 10px */
-    transform: translateX(-50%); /* Initial center correction */
-    transition: transform 0.1s linear;
-}
-.heading-indicator { /* Fixed triangle pointing to heading */
-    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    color: var(--pfd-value-box-border); font-size: 1.2rem; z-index: 5;
-}
-.heading-value-box { /* Box displaying numeric heading */
-    position: absolute; top: 25px; left: 50%; transform: translateX(-50%);
-    background-color: var(--pfd-value-box-bg); border: 1px solid var(--pfd-value-box-border);
-    color: var(--pfd-text-color); padding: 1px 5px; font-size: 0.9rem;
-    font-weight: bold; z-index: 5; border-radius: 3px;
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
-}
-
-/* Vertical Speed Indicator (VSI) */
-.vsi {
-    position: absolute; right: 90px; /* Position relative to PFD edge */ top: 50%;
-    transform: translateY(-50%); width: 50px; height: 150px;
-    border: 1px solid var(--pfd-border-internal); border-radius: 5px;
-    transition: border-color var(--transition-speed) ease;
-}
+.pfd-container { position: relative; height: 300px; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; overflow: hidden; border: 2px solid var(--pfd-border-color); border-radius: 5px; transition: border-color var(--transition-speed) ease; }
+.pfd-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--pfd-bg-color); color: var(--pfd-text-color); transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease; }
+.attitude-indicator { position: absolute; top: 50%; left: 50%; width: 150px; height: 150px; transform: translate(-50%, -50%); border: 1px solid var(--pfd-border-internal); border-radius: 50%; overflow: hidden; background: linear-gradient(to bottom, var(--pfd-attitude-sky) 50%, var(--pfd-attitude-ground) 50%); transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+.attitude-fixed { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform: translate(-50%, -50%); border-left: 15px solid transparent; border-right: 15px solid transparent; border-bottom: 10px solid var(--pfd-fixed-symbol); z-index: 3; }
+.attitude-fixed:before, .attitude-fixed:after { content: ''; position: absolute; top: 10px; width: 35px; height: 5px; background-color: var(--pfd-fixed-symbol); }
+.attitude-fixed:before { left: -35px; } .attitude-fixed:after { right: -35px;}
+.attitude-roll, .attitude-pitch { position: absolute; width: 100%; height: 100%; z-index: 1; }
+.tape { position: absolute; height: 100%; width: 70px; border-left: 1px solid var(--pfd-border-internal); border-right: 1px solid var(--pfd-border-internal); overflow: hidden; transition: border-color var(--transition-speed) ease;}
+.speed-tape { left: 10px; border-right: none;} .altitude-tape { right: 10px; border-left: none;}
+.tape-scale { position: absolute; width: 100%; height: 3000px; top: 50%; background-image: linear-gradient(to bottom, var(--pfd-tape-tick) 1px, transparent 1px); background-size: 100% 10px; transform: translateY(-50%); transition: transform 0.1s linear; }
+.tape-value-box { position: absolute; top: 50%; left: 0; width: 100%; transform: translateY(-50%); background-color: var(--pfd-value-box-bg); border: 1px solid var(--pfd-value-box-border); color: var(--pfd-text-color); padding: 2px 5px; text-align: center; font-weight: bold; z-index: 5; transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+.speed-value-box { text-align: right; padding-right: 8px; } .altitude-value-box { text-align: left; padding-left: 8px; }
+.heading-tape-container { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 250px; height: 50px; border: 1px solid var(--pfd-border-internal); overflow: hidden; transition: border-color var(--transition-speed) ease;}
+.heading-scale { position: absolute; height: 100%; width: 2000px; left: 50%; background-image: linear-gradient(to right, var(--pfd-tape-tick) 1px, transparent 1px); background-size: 10px 100%; transform: translateX(-50%); transition: transform 0.1s linear; }
+.heading-indicator { position: absolute; top: 0; left: 50%; transform: translateX(-50%); color: var(--pfd-value-box-border); font-size: 1.2rem; z-index: 5; }
+.heading-value-box { position: absolute; top: 25px; left: 50%; transform: translateX(-50%); background-color: var(--pfd-value-box-bg); border: 1px solid var(--pfd-value-box-border); color: var(--pfd-text-color); padding: 1px 5px; font-size: 0.9rem; font-weight: bold; z-index: 5; border-radius: 3px; transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;}
+.vsi { position: absolute; right: 90px; top: 50%; transform: translateY(-50%); width: 50px; height: 150px; border: 1px solid var(--pfd-border-internal); border-radius: 5px; transition: border-color var(--transition-speed) ease;}
 .vsi-scale { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
-.vsi-mark { /* Scale markings (+10, +5, 0, -5, -10) */
-    position: absolute; left: 5px; right: 5px; height: 1px;
-    background-color: var(--pfd-tape-tick); font-size: 0.7rem;
-    color: var(--pfd-text-color); padding-left: 25px; /* Position text */
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-}
-.vsi-level { top: 50%; transform: translateY(-50%); }
-.vsi-up-1 { top: 35%; } .vsi-up-2 { top: 20%; }
-.vsi-down-1 { top: 65%; } .vsi-down-2 { top: 80%; }
-.vsi-needle { /* The moving needle */
-    position: absolute; left: 5px; top: 50%; width: 20px; height: 2px;
-    background-color: var(--pfd-vsi-needle); transform-origin: left center;
-    transform: translateY(-50%) rotate(0deg); transition: transform 0.1s linear; z-index: 6;
-}
-.vsi-value-box { /* Numeric VSI value */
-    position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
-    font-size: 0.8rem; color: var(--pfd-vsi-needle);
-    background-color: rgba(0,0,0,0.6); padding: 1px 3px; border-radius: 2px;
-}
+.vsi-mark { position: absolute; left: 5px; right: 5px; height: 1px; background-color: var(--pfd-tape-tick); font-size: 0.7rem; color: var(--pfd-text-color); padding-left: 25px; transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;}
+.vsi-level { top: 50%; transform: translateY(-50%); } .vsi-up-1 { top: 35%; } .vsi-up-2 { top: 20%; } .vsi-down-1 { top: 65%; } .vsi-down-2 { top: 80%; }
+.vsi-needle { position: absolute; left: 5px; top: 50%; width: 20px; height: 2px; background-color: var(--pfd-vsi-needle); transform-origin: left center; transform: translateY(-50%) rotate(0deg); transition: transform 0.1s linear; z-index: 6; }
+.vsi-value-box { position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); font-size: 0.8rem; color: var(--pfd-vsi-needle); background-color: rgba(0,0,0,0.6); padding: 1px 3px; border-radius: 2px; }
+
 
 /* --- Aircraft Icon --- */
-.aircraft-icon {
-    color: yellow;
-    font-size: 1.5rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-    /* Rotation applied by JS */
-}
+.aircraft-icon { color: yellow; font-size: 1.5rem; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); }
 
 /* --- Form Controls Theming --- */
 .form-range::-webkit-slider-thumb { background-color: var(--form-range-thumb-bg); transition: background-color var(--transition-speed) ease; }
@@ -313,16 +183,9 @@ body {
 .form-check-input { background-color: var(--form-switch-bg); border-color: var(--form-switch-border-color); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
 .form-check-input:checked { background-color: var(--form-switch-checked-bg); border-color: var(--form-switch-checked-bg); }
 .form-switch .form-check-label { color: var(--text-color); transition: color var(--transition-speed) ease; }
-.form-select {
-    background-color: var(--card-bg-color); /* Match card background */
-    color: var(--text-color);
-    border-color: var(--border-color);
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
-}
-.dark-mode .form-select {
-    /* Style background image for dropdown arrow in dark mode */
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23adb5bd' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-}
+.form-select { background-color: var(--card-bg-color); color: var(--text-color); border-color: var(--border-color); transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+.dark-mode .form-select { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); } /* Use lighter arrow color */
+
 
 /* --- Buttons Theming --- */
 .btn { transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out, filter 0.15s ease-in-out; }
@@ -335,46 +198,19 @@ body {
 
 
 /* --- Chart Styles --- */
-.chart-wrapper {
-    position: relative; /* Needed for Chart.js responsiveness */
-    height: 200px; /* Control chart height */
-    width: 100%;
-}
+.chart-wrapper { position: relative; height: 200px; width: 100%; }
 
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 991.98px) { /* Medium devices and down (tablets) */
-     #map {
-        height: 400px; /* Adjust height */
-        aspect-ratio: unset; /* Remove aspect ratio */
-    }
-     .pfd-container {
-        height: 250px;
-    }
-     #info-card {
-        max-width: 280px; /* Adjust width */
-        font-size: 0.8rem;
-    }
-     #info-card h4{
-         font-size: 1rem;
-     }
+     #map { height: 400px; aspect-ratio: unset; }
+     .pfd-container { height: 250px; }
+     #info-card { max-width: 280px; font-size: 0.8rem; }
+     #info-card h6 { font-size: 0.9rem; }
 }
 @media (max-width: 767.98px) { /* Small devices and down (phones) */
-    #map {
-        height: 350px;
-    }
-     .pfd-container {
-        height: 200px;
-    }
-     #info-card { /* Stack below map on small screens */
-        position: relative;
-        width: 100%;
-        max-width: none;
-        top: auto; right: auto;
-        margin-top: 1rem; /* Add space when stacked */
-        box-shadow: var(--bs-box-shadow-sm); /* Use Bootstrap's default small shadow */
-    }
-    .dark-mode #info-card {
-         box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .2); /* Consistent shadow */
-    }
+    #map { height: 350px; }
+    .pfd-container { height: 200px; }
+    #info-card { position: relative; width: 100%; max-width: none; top: auto; right: auto; margin-top: 1rem; box-shadow: var(--bs-box-shadow-sm); }
+    .dark-mode #info-card { box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .2); }
 }
