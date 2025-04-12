@@ -1,0 +1,110 @@
+[
+    {
+      "origin": {
+        "name": "Bucharest Henri Coandă International Airport",
+        "iata": "OTP",
+        "coordinates": {
+          "latitude": 44.5722,
+          "longitude": 26.1022
+        }
+      },
+      "destination": {
+        "name": "Athens International Airport Eleftherios Venizelos",
+        "iata": "ATH",
+        "coordinates": {
+          "latitude": 37.9364,
+          "longitude": 23.9444
+        }
+      }
+    },
+    {
+      "origin": {
+        "name": "London Heathrow Airport",
+        "iata": "LHR",
+        "coordinates": {
+          "latitude": 51.4700,
+          "longitude": -0.4543
+        }
+      },
+      "destination": {
+        "name": "New York John F. Kennedy International Airport",
+        "iata": "JFK",
+        "coordinates": {
+          "latitude": 40.6413,
+          "longitude": -73.7781
+        }
+      }
+    },
+    {
+      "origin": {
+        "name": "Paris Charles de Gaulle Airport",
+        "iata": "CDG",
+        "coordinates": {
+          "latitude": 49.0097,
+          "longitude": 2.5479
+        }
+      },
+      "destination": {
+        "name": "Dubai International Airport",
+        "iata": "DXB",
+        "coordinates": {
+          "latitude": 25.2532,
+          "longitude": 55.3657
+        }
+      }
+    },
+    {
+      "origin": {
+        "name": "Los Angeles International Airport",
+        "iata": "LAX",
+        "coordinates": {
+          "latitude": 33.9416,
+          "longitude": -118.4085
+        }
+      },
+      "destination": {
+        "name": "Tokyo Haneda Airport",
+        "iata": "HND",
+        "coordinates": {
+          "latitude": 35.5494,
+          "longitude": 139.7798
+        }
+      }
+    },
+    {
+      "origin": {
+        "name": "Singapore Changi Airport",
+        "iata": "SIN",
+        "coordinates": {
+          "latitude": 1.3644,
+          "longitude": 103.9915
+        }
+      },
+      "destination": {
+        "name": "Sydney Kingsford Smith Airport",
+        "iata": "SYD",
+        "coordinates": {
+          "latitude": -33.9399,
+          "longitude": 151.1753
+        }
+      }
+    },
+    {
+      "origin": {
+        "name": "Frankfurt Airport",
+        "iata": "FRA",
+        "coordinates": {
+          "latitude": 50.0379,
+          "longitude": 8.5622
+        }
+      },
+      "destination": {
+        "name": "Istanbul Airport",
+        "iata": "IST",
+        "coordinates": {
+          "latitude": 41.2753,
+          "longitude": 28.7519
+        }
+      }
+    }
+  ]

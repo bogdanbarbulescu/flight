@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATH-OTP Flight Simulator</title>
+    <title>Flight Simulator</title>
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -29,62 +29,17 @@
     <!-- Defer loading our custom script -->
     <script src="app.js" defer></script>
 </head>
-<body> <!-- Body tag is essential for dark mode class -->
+<body>
     <div class="container-fluid mt-3">
-        <h1 class="text-center mb-3 page-title">Athens (ATH) <i class="fa-solid fa-plane-departure"></i> Bucharest (OTP) Flight Simulator</h1>
+        <!-- Dynamic Title -->
+        <h1 class="text-center mb-4 page-title" id="flight-title">
+            Flight Simulator <i class="fa-solid fa-plane"></i>
+        </h1>
 
         <div class="row">
-            <!-- Map and PFD Column -->
-            <div class="col-lg-8 mb-3">
-                <div id="map"></div>
-                <div id="pfd" class="mt-3 pfd-container">
-                    <div class="pfd-background">
-                        <!-- Attitude Indicator (Static Placeholder) -->
-                        <div class="attitude-indicator">
-                             <div class="attitude-roll"></div>
-                             <div class="attitude-pitch"></div>
-                             <div class="attitude-fixed"></div>
-                        </div>
-                        <!-- Speed Tape -->
-                        <div class="tape speed-tape">
-                            <div class="tape-scale speed-scale"></div>
-                            <div class="tape-value-box speed-value-box">
-                                <span id="current-speed-value">---</span> <span class="unit">km/h</span>
-                            </div>
-                        </div>
-                        <!-- Altitude Tape -->
-                        <div class="tape altitude-tape">
-                            <div class="tape-scale altitude-scale"></div>
-                             <div class="tape-value-box altitude-value-box">
-                                <span id="current-altitude-value">-----</span> <span class="unit">m</span>
-                            </div>
-                        </div>
-                        <!-- Heading Tape -->
-                        <div class="heading-tape-container">
-                            <div class="tape-scale heading-scale"></div>
-                            <div class="heading-indicator">▲</div>
-                            <div class="heading-value-box">
-                                <span id="current-heading-value">---</span>°
-                            </div>
-                        </div>
-                        <!-- Vertical Speed Indicator -->
-                        <div class="vsi">
-                            <div class="vsi-needle"></div>
-                            <div class="vsi-scale">
-                                <!-- Labels updated for m/min scale (+600 / -600) -->
-                                <div class="vsi-mark vsi-up-2">+10</div> <!-- Corresponds to +600 m/min -->
-                                <div class="vsi-mark vsi-up-1">+5</div> <!-- Corresponds to +300 m/min -->
-                                <div class="vsi-mark vsi-level">0</div>
-                                <div class="vsi-mark vsi-down-1">-5</div> <!-- Corresponds to -300 m/min -->
-                                <div class="vsi-mark vsi-down-2">-10</div><!-- Corresponds to -600 m/min -->
-                            </div>
-                             <div class="vsi-value-box">
-                                <span id="current-vsi-value">----</span> <span class="unit">m/min</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <!-- Info Card -->
+            <!-- Left Column: Map & PFD -->
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <!-- Info Card - Positioned Absolutely -->
                 <div id="info-card" class="info-card">
                     <button id="info-card-close" class="info-card-close" aria-label="Close Flight Information">×</button>
                     <h4>Flight Information</h4>
@@ -95,7 +50,7 @@
                     <p>Heading: <span id="info-heading">---</span>°</p>
                     <p>Vertical Speed: <span id="info-vsi">----</span> m/min</p>
                     <hr>
-                    <p>Route: ATH <i class="fa-solid fa-arrow-right-long"></i> OTP</p>
+                    <p>Route: <span id="info-route-origin">---</span> <i class="fa-solid fa-arrow-right-long"></i> <span id="info-route-dest">---</span></p>
                     <p>Total Distance: <span id="info-total-distance">---</span> km</p>
                     <p>Flown Distance: <span id="info-flown-distance">---</span> km</p>
                     <p>Remaining Distance: <span id="info-remaining-distance">---</span> km</p>
@@ -104,48 +59,91 @@
                     <hr>
                     <p>Wind: <span id="info-wind">---° @ --- km/h</span></p>
                 </div>
+
+                <!-- Map Container -->
+                <div id="map" class="mb-3"></div>
+
+                <!-- PFD Container -->
+                <div id="pfd" class="pfd-container">
+                    <div class="pfd-background">
+                        <!-- Attitude Indicator -->
+                        <div class="attitude-indicator"><div class="attitude-roll"></div><div class="attitude-pitch"></div><div class="attitude-fixed"></div></div>
+                        <!-- Speed Tape -->
+                        <div class="tape speed-tape"><div class="tape-scale speed-scale"></div><div class="tape-value-box speed-value-box"><span id="current-speed-value">---</span> <span class="unit">km/h</span></div></div>
+                        <!-- Altitude Tape -->
+                        <div class="tape altitude-tape"><div class="tape-scale altitude-scale"></div><div class="tape-value-box altitude-value-box"><span id="current-altitude-value">-----</span> <span class="unit">m</span></div></div>
+                        <!-- Heading Tape -->
+                        <div class="heading-tape-container"><div class="tape-scale heading-scale"></div><div class="heading-indicator">▲</div><div class="heading-value-box"><span id="current-heading-value">---</span>°</div></div>
+                        <!-- VSI -->
+                        <div class="vsi"><div class="vsi-needle"></div><div class="vsi-scale"><div class="vsi-mark vsi-up-2">+10</div><div class="vsi-mark vsi-up-1">+5</div><div class="vsi-mark vsi-level">0</div><div class="vsi-mark vsi-down-1">-5</div><div class="vsi-mark vsi-down-2">-10</div></div><div class="vsi-value-box"><span id="current-vsi-value">----</span> <span class="unit">m/min</span></div></div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Controls and Charts Column -->
+            <!-- Right Column: Controls & Charts -->
             <div class="col-lg-4">
-                <div class="controls-container p-3 border rounded mb-3">
-                    <h4>Controls</h4>
-                    <button id="autopilot-toggle" class="btn btn-primary w-100 mb-3">
-                        <i class="fa-solid fa-power-off"></i> Engage Autopilot
-                    </button>
-                    <button id="reset-button" class="btn btn-danger w-100 mb-3">
-                        <i class="fa-solid fa-rotate-right"></i> Reset Simulation
-                    </button>
+                <!-- Controls Card -->
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3">Controls</h4>
 
-                    <!-- Sliders are metric -->
-                    <div class="mb-3">
-                        <label for="target-altitude" class="form-label">Target Altitude: <span id="target-altitude-value">3000</span> m</label>
-                        <input type="range" class="form-range" id="target-altitude" min="300" max="11000" step="100" value="3000">
-                    </div>
+                        <!-- Route Selector -->
+                        <div class="mb-3">
+                            <label for="route-selector" class="form-label">Select Route:</label>
+                            <select class="form-select form-select-sm" id="route-selector" aria-label="Select flight route">
+                                <option selected disabled>Loading routes...</option>
+                                <!-- Options populated by JS -->
+                            </select>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="target-speed" class="form-label">Target Airspeed: <span id="target-speed-value">400</span> km/h</label>
-                        <input type="range" class="form-range" id="target-speed" min="150" max="800" step="10" value="400">
-                    </div>
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-2 mb-3">
+                            <button id="autopilot-toggle" class="btn btn-primary btn-sm"><i class="fa-solid fa-power-off"></i> Engage Autopilot</button>
+                            <button id="reset-button" class="btn btn-danger btn-sm"><i class="fa-solid fa-rotate-right"></i> Reset Current Route</button>
+                        </div>
 
-                     <div class="form-check form-switch mb-3">
-                        <input class="form-check-input" type="checkbox" role="switch" id="info-card-toggle" checked>
-                        <label class="form-check-label" for="info-card-toggle">Show Info Card</label>
-                    </div>
-                    <div class="form-check form-switch mb-1">
-                        <input class="form-check-input" type="checkbox" role="switch" id="dark-mode-toggle">
-                        <label class="form-check-label" for="dark-mode-toggle">Dark Mode</label>
+                        <!-- Sliders -->
+                        <div class="mb-3">
+                            <label for="target-altitude" class="form-label">Target Altitude: <span id="target-altitude-value">3000</span> m</label>
+                            <input type="range" class="form-range" id="target-altitude" min="300" max="11000" step="100" value="3000">
+                        </div>
+                        <div class="mb-3">
+                            <label for="target-speed" class="form-label">Target Airspeed: <span id="target-speed-value">400</span> km/h</label>
+                            <input type="range" class="form-range" id="target-speed" min="150" max="800" step="10" value="400">
+                        </div>
+
+                        <!-- Toggles -->
+                        <div class="d-flex justify-content-between">
+                             <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="info-card-toggle" checked>
+                                <label class="form-check-label" for="info-card-toggle">Info Card</label>
+                            </div>
+                             <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="dark-mode-toggle">
+                                <label class="form-check-label" for="dark-mode-toggle">Dark Mode</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="charts-container">
-                    <h4 class="text-center chart-title">Performance Charts</h4>
-                    <canvas id="altitudeSpeedChart"></canvas>
-                    <h4 class="text-center mt-4 chart-title">Conceptual Forces</h4>
-                    <canvas id="forcesChart"></canvas>
+                <!-- Charts Card -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                         <h4 class="card-title text-center mb-3">Performance Charts</h4>
+                         <div class="chart-wrapper mb-3" style="height: 200px;"> <!-- Wrapper to constrain chart height -->
+                             <canvas id="altitudeSpeedChart"></canvas>
+                         </div>
+                         <h4 class="card-title text-center mt-3 mb-3">Conceptual Forces</h4>
+                         <div class="chart-wrapper" style="height: 200px;"> <!-- Wrapper to constrain chart height -->
+                            <canvas id="forcesChart"></canvas>
+                         </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </div> <!-- End Right Column -->
+        </div> <!-- End Row -->
+    </div> <!-- End Container -->
+
+    <!-- routes.json is fetched via JS -->
+
 </body>
 </html>
